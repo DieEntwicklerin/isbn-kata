@@ -76,9 +76,10 @@ public class ISBN {
     }
 
     public String displayInCorrectFormatBasedOnLength() {
-        if (StringUtils.removeSeparators(this.isbn).length() == 10) {
+        String isbnWithoutSeparators = StringUtils.removeSeparators(this.isbn);
+        if (isbnWithoutSeparators.length() == 10) {
             return StringUtils.replaceAllHyphens(this.isbn, " ");
-        } else if (StringUtils.removeSeparators(this.isbn).length() == 13) {
+        } else if (isbnWithoutSeparators.length() == 13) {
             return StringUtils.replaceAllSpaces(this.isbn, "-");
         }
         return null;
