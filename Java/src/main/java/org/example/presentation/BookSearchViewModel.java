@@ -53,7 +53,7 @@ public class BookSearchViewModel {
         ISBN isbnEntity = new ISBN(book.getIsbn());
 
         var isbn = isbnEntity.displayInCorrectFormatBasedOnLength();
-        var ean = convertToEan(book.getIsbn());
+        var ean = isbnEntity.convertToEan();
         var title = book.getTitle();
         var author = book.getAuthor();
 
@@ -61,7 +61,7 @@ public class BookSearchViewModel {
         return searchResult;
     }
 
-    public String convertToEan(String isbn) {
+    public static String convertToEan(String isbn) {
         //TODO domain knowledge of ISBN or EAN
         var isbnWithoutSeparators = StringUtils.removeSeparators(isbn);
         String prefix;

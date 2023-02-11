@@ -1,5 +1,6 @@
 package org.example.domain;
 
+import org.example.presentation.BookSearchViewModel;
 import org.example.utils.StringUtils;
 
 public class ISBN {
@@ -83,5 +84,9 @@ public class ISBN {
             return StringUtils.replaceAllSpaces(this.isbn, "-");
         }
         return null;
+    }
+
+    public String convertToEan() {
+       return BookSearchViewModel.convertToEan(this.isbn);
     }
 }
