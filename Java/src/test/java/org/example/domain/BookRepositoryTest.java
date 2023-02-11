@@ -28,4 +28,13 @@ class BookRepositoryTest {
         Optional<Book> book = bookRepository.byIsbn(validISBN);
         Assertions.assertNotNull(book.get());
     }
+
+    @Test
+    void bookIsNotFoundForInValidIsbn() {
+        BookRepository bookRepository = new FakeInMemoryBookRepository();
+        String invalidISBNString= "978-3-16-";
+        ISBN validISBN= new  ISBN(invalidISBNString);
+        Optional<Book> book = bookRepository.byIsbn(validISBN);
+        Assertions.assertTrue(book.isEmpty());
+    }
 }
