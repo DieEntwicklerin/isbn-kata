@@ -2,7 +2,6 @@ package org.example;
 
 import org.example.domain.Book;
 import org.example.persistence.FakeInMemoryBookRepository;
-import org.example.utils.StringUtils;
 
 import java.util.List;
 import java.util.Optional;
@@ -18,7 +17,7 @@ public class BookRepositoryMock extends FakeInMemoryBookRepository {
     public Optional<Book> byIsbn(String isbn) {
         return allBooks
                 .stream()
-                .filter(book -> isEquivalentIsbn(book.getIsbn(), isbn))
+                .filter(book -> isEquivalentIsbn(book.getIsbnInStandardFormat(), isbn))
                 .findFirst();
     }
 }

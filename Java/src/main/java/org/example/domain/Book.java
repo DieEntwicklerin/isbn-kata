@@ -2,18 +2,18 @@ package org.example.domain;
 
 public class Book {
 
-    private final String isbn;
+    private final ISBN isbn;
     private final String title;
     private final String author;
 
-    public Book(String isbn, String title, String author) {
-        this.isbn = isbn;
+    public Book(String isbnString, String title, String author) {
+        this.isbn = new ISBN(isbnString);
         this.title = title;
         this.author = author;
     }
 
-    public String getIsbn() {
-        return isbn;
+    public String getIsbnInStandardFormat() {
+        return isbn.displayInCorrectFormatBasedOnLength();
     }
 
     public String getTitle() {
@@ -26,7 +26,7 @@ public class Book {
 
     public String getStringRepresentationOfBook() {
         //TODO change isbn usage
-        ISBN isbnEntity = new ISBN(getIsbn());
+        ISBN isbnEntity = new ISBN(getIsbnInStandardFormat());
 
         var isbn1 = isbnEntity.displayInCorrectFormatBasedOnLength();
         var ean = isbnEntity.convertToEan();
