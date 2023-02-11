@@ -1,5 +1,6 @@
 package org.example.presentation;
 
+import org.example.BookRepositoryMock;
 import org.example.DIContainer;
 import org.example.domain.BookRepository;
 import org.junit.jupiter.api.AfterEach;
@@ -22,12 +23,11 @@ public class BookSearchViewModelTest {
 
     @BeforeEach
     public void setUp() {
-        bookSearchViewModel = DIContainer.instantiateBookSearchViewModel(
-                this::showSearchResult, this::showInvalidIsbnErrorMessage, this::showBookNotFoundErrorMessage);
+        bookSearchViewModel =  new BookSearchViewModel( new BookRepositoryMock(), this::showSearchResult, this::showInvalidIsbnErrorMessage, this::showBookNotFoundErrorMessage);
     }
 
     @Test
-    public void searchBookWithValidISBN() {
+    public void searchBookWithValid13DigitISBN() {
         String validISBN = "978-3-16-148410-0";
         bookSearchViewModel.searchBook(validISBN);
         Assertions.assertEquals("978-3-16-148410-0, 9783161484100, Example Book, Jane Doe", result);
