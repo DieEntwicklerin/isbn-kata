@@ -21,7 +21,7 @@ public class BookRepositoryMock extends FakeInMemoryBookRepository {
             return null;
         return allBooks
                 .stream()
-                .filter(book -> isEquivalentIsbn(book.getIsbnInStandardFormat(), isbn.displayInCorrectFormatBasedOnLength()))
+                .filter(book -> isEquivalentIsbn(book.getIsbn().displayInCorrectFormatBasedOnLength(), isbn.displayInCorrectFormatBasedOnLength()))
                 .findFirst();
     }
 }

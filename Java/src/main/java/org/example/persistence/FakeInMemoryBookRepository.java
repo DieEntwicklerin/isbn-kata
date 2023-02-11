@@ -1,6 +1,5 @@
 package org.example.persistence;
 
-import net.bytebuddy.dynamic.DynamicType;
 import org.example.domain.Book;
 import org.example.domain.BookRepository;
 import org.example.utils.StringUtils;
@@ -19,7 +18,7 @@ public class FakeInMemoryBookRepository implements BookRepository {
     public Optional<Book> byIsbn(String isbn) {
         return allBooks
                 .stream()
-                .filter(book -> isEquivalentIsbn(book.getIsbnInStandardFormat(), isbn))
+                .filter(book -> isEquivalentIsbn(book.getIsbn().toString(), isbn))
                 .findFirst();
     }
 
@@ -34,7 +33,7 @@ public class FakeInMemoryBookRepository implements BookRepository {
             return null;
         return allBooks
                 .stream()
-                .filter(book -> isEquivalentIsbn(book.getIsbnInStandardFormat(), isbn.displayInCorrectFormatBasedOnLength()))
+                .filter(book -> isEquivalentIsbn(book.getIsbn().displayInCorrectFormatBasedOnLength(), isbn.displayInCorrectFormatBasedOnLength()))
                 .findFirst();
     }
 }

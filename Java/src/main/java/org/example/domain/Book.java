@@ -12,8 +12,8 @@ public class Book {
         this.author = author;
     }
 
-    public String getIsbnInStandardFormat() {
-        return isbn.displayInCorrectFormatBasedOnLength();
+    public ISBN getIsbn() {
+        return isbn;
     }
 
     public String getTitle() {
