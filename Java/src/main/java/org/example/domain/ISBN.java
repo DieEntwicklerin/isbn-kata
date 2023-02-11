@@ -6,7 +6,7 @@ import org.example.utils.StringUtils;
 import java.util.Objects;
 
 public class ISBN {
-    private String isbn;
+    private final String isbn;
 
     public ISBN(@NonNull String isbn) {
         this.isbn = isbn;
@@ -80,22 +80,29 @@ public class ISBN {
 
     public String displayInCorrectFormatBasedOnLength() {
         String isbnWithoutSeparators = getIsbnWithoutSeparators();
-        //TODO refactor to a new method is10DigitIsbn ..
-        if (isbnWithoutSeparators.length() == 10) {
+        if (is10DigitISBN(isbnWithoutSeparators)) {
             return StringUtils.replaceAllHyphens(this.isbn, " ");
-        } else if (isbnWithoutSeparators.length() == 13) {
+        } else if (is13DigitISBN(isbnWithoutSeparators)) {
             return StringUtils.replaceAllSpaces(this.isbn, "-");
         }
         return isbn.toString();
+    }
+
+    private static boolean is13DigitISBN(String isbnWithoutSeparators) {
+        return isbnWithoutSeparators.length() == 13;
+    }
+
+    private static boolean is10DigitISBN(String isbnWithoutSeparators) {
+        return isbnWithoutSeparators.length() == 10;
     }
 
 
     public String convertToEan() {
         var isbnWithoutSeparators = getIsbnWithoutSeparators();
         String prefix;
-        if (isbnWithoutSeparators.length() == 10) {
+        if (is10DigitISBN(isbnWithoutSeparators)) {
             prefix = "978";
-        } else if (isbnWithoutSeparators.length() == 13) {
+        } else if (is13DigitISBN(isbnWithoutSeparators)) {
             prefix = "";
         } else {
             //TODO replace by a business exception. If this exception is thrown the isbn is malformed
