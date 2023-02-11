@@ -48,12 +48,10 @@ class BookSearchViewModelTest {
     }
 
     private void showBookNotFoundErrorMessage(String isbn) {
-        var errorMessage = String.format("No book found for the provided ISBN %s.", isbn);
-        this.errorStream=errorMessage;
+        this.errorStream= String.format("No book found for the provided ISBN %s.", isbn);
     }
 
     private void showInvalidIsbnErrorMessage(String illFormedIsbn) {
-        var errorMessage = String.format("The provided search phrase `%s` is not a well-formed ISBN.", illFormedIsbn);
-        invalidISBNStream=errorMessage;
+        invalidISBNStream= String.format("The provided search phrase `%s` is not a well-formed ISBN.", illFormedIsbn);
     }
 }
