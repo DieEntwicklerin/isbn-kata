@@ -22,7 +22,7 @@ public class ISBN {
     public boolean isWellFormedIsbn() {
         //TODO refactor long method
         if (this.isbn != null && !this.isbn.isBlank()) {
-            int lengthWithoutSeparators = this.isbn.replace(" ", "").replace("-", "").length();
+            int lengthWithoutSeparators = isbnWithoutSeparators.length();
             if (lengthWithoutSeparators == 10 || this.isbn.length() - 4 == 13) {
                 int numberOfHyphenSeparators = 0;
                 int numberOfSpaceSeparators = 0;
@@ -81,28 +81,28 @@ public class ISBN {
     }
 
     public String displayInCorrectFormatBasedOnLength() {
-        if (is10DigitISBN(isbnWithoutSeparators)) {
+        if (is10DigitISBN()) {
             return StringUtils.replaceAllHyphens(this.isbn, " ");
-        } else if (is13DigitISBN(isbnWithoutSeparators)) {
+        } else if (is13DigitISBN()) {
             return StringUtils.replaceAllSpaces(this.isbn, "-");
         }
         return isbn.toString();
     }
 
-    private static boolean is13DigitISBN(String isbnWithoutSeparators) {
+    private boolean is13DigitISBN() {
         return isbnWithoutSeparators.length() == 13;
     }
 
-    private static boolean is10DigitISBN(String isbnWithoutSeparators) {
+    private boolean is10DigitISBN() {
         return isbnWithoutSeparators.length() == 10;
     }
 
 
     public String convertToEan() {
         String prefix;
-        if (is10DigitISBN(isbnWithoutSeparators)) {
+        if (is10DigitISBN()) {
             prefix = "978";
-        } else if (is13DigitISBN(isbnWithoutSeparators)) {
+        } else if (is13DigitISBN()) {
             prefix = "";
         } else {
             //TODO replace by a business exception. If this exception is thrown the isbn is malformed
