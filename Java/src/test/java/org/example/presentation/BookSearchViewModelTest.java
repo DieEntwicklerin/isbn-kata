@@ -36,6 +36,15 @@ public class BookSearchViewModelTest {
     }
 
     @Test
+    public void searchBookWithFormattedISBN() {
+        String validISBN = "97-8-3-1-61484100";
+        bookSearchViewModel.searchBook(validISBN);
+        Assertions.assertEquals("978-3-16-148410-0, 9783161484100, Example Book, Jane Doe", result);
+        Assertions.assertNull(errorStream);
+        Assertions.assertNull(invalidISBNStream);
+    }
+
+    @Test
     public void searchBookWithValid10DigitISBN() {
         String validISBN = "386680192-0";
         bookSearchViewModel.searchBook(validISBN);
