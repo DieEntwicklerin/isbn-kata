@@ -10,10 +10,10 @@ import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class BookRepositoryTest {
+public class BookRepositoryTest {
 
     @Test
-    void bookIsFoundForValidIsbn() {
+   public void bookIsFoundForValidIsbn() {
         BookRepository bookRepository = new FakeInMemoryBookRepository();
         String validISBNString= "978-3-16-148410-0";
         ISBN validISBN= new  ISBN(validISBNString);
@@ -22,7 +22,7 @@ class BookRepositoryTest {
     }
 
     @Test
-    void bookIsNotFoundForInValidIsbn() {
+    public void bookIsNotFoundForInValidIsbn() {
         BookRepository bookRepository = new FakeInMemoryBookRepository();
         String invalidISBNString= "978-3-16-";
         ISBN validISBN= new  ISBN(invalidISBNString);

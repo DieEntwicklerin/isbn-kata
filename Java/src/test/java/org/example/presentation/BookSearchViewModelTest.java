@@ -11,7 +11,7 @@ import java.util.function.Consumer;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class BookSearchViewModelTest {
+public class BookSearchViewModelTest {
     String result=null;
     String errorStream=null;
 
@@ -20,13 +20,13 @@ class BookSearchViewModelTest {
     private BookSearchViewModel bookSearchViewModel;
 
     @BeforeEach
-    void setUp() {
+    public void setUp() {
         bookSearchViewModel = DIContainer.instantiateBookSearchViewModel(
                 this::showSearchResult, this::showInvalidIsbnErrorMessage, this::showBookNotFoundErrorMessage);
     }
 
     @Test
-    void searchBookWithValidISBN() {
+    public  void searchBookWithValidISBN() {
         String validISBN= "978-3-16-148410-0";
         bookSearchViewModel.searchBook(validISBN);
         Assertions.assertNotNull(result);
@@ -35,7 +35,7 @@ class BookSearchViewModelTest {
     }
 
     @Test
-    void searchBookWithInValidISBN() {
+    public  void searchBookWithInValidISBN() {
         String inValidISBN= "978-3-16-148410";
         bookSearchViewModel.searchBook(inValidISBN);
         Assertions.assertNull(result);
