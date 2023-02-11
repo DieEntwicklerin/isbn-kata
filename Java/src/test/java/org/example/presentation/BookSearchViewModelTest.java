@@ -14,11 +14,15 @@ import static org.junit.jupiter.api.Assertions.*;
 class BookSearchViewModelTest {
     String result=null;
     String errorStream=null;
+
+    String invalidISBNStream=null;
+
     private BookSearchViewModel bookSearchViewModel;
 
     @BeforeEach
     void setUp() {
-        bookSearchViewModel = DIContainer.instantiateBookSearchViewModel(this::showSearchResult, this::showBookNotFoundErrorMessage);
+        bookSearchViewModel = DIContainer.instantiateBookSearchViewModel(
+                this::showSearchResult, this::showInvalidIsbnErrorMessage, this::showBookNotFoundErrorMessage);
     }
 
     @Test
@@ -27,6 +31,7 @@ class BookSearchViewModelTest {
         bookSearchViewModel.searchBook(validISBN);
         Assertions.assertNotNull(result);
         Assertions.assertNull(errorStream);
+        Assertions.assertNull(invalidISBNStream);
     }
 
     @Test
@@ -34,7 +39,8 @@ class BookSearchViewModelTest {
         String inValidISBN= "978-3-16-148410";
         bookSearchViewModel.searchBook(inValidISBN);
         Assertions.assertNull(result);
-        Assertions.assertNotNull(errorStream);
+        Assertions.assertNotNull(invalidISBNStream);
+        Assertions.assertNull(errorStream);
     }
 
     private void showSearchResult(String result) {
@@ -44,5 +50,10 @@ class BookSearchViewModelTest {
     private void showBookNotFoundErrorMessage(String isbn) {
         var errorMessage = String.format("No book found for the provided ISBN %s.", isbn);
         this.errorStream=errorMessage;
+    }
+
+    private void showInvalidIsbnErrorMessage(String illFormedIsbn) {
+        var errorMessage = String.format("The provided search phrase `%s` is not a well-formed ISBN.", illFormedIsbn);
+        invalidISBNStream=errorMessage;
     }
 }
