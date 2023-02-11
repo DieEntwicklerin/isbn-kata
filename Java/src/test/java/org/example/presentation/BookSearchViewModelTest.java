@@ -21,10 +21,6 @@ class BookSearchViewModelTest {
         bookSearchViewModel = DIContainer.instantiateBookSearchViewModel(this::showSearchResult, this::showBookNotFoundErrorMessage);
     }
 
-    @AfterEach
-    void tearDown() {
-    }
-
     @Test
     void searchBookWithValidISBN() {
         String validISBN= "978-3-16-148410-0";

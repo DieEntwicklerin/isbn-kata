@@ -12,14 +12,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class BookRepositoryTest {
 
-    @BeforeEach
-    void setUp() {
-    }
-
-    @AfterEach
-    void tearDown() {
-    }
-
     @Test
     void bookIsFoundForValidIsbn() {
         BookRepository bookRepository = new FakeInMemoryBookRepository();
