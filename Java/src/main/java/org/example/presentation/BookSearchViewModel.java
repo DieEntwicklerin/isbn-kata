@@ -41,13 +41,13 @@ public class BookSearchViewModel {
 
     private void onBookFound(Book book) {
         //TODO domain knowledge of Book
-        String searchResult = getStringRepresentationOfBook(book);
+        String searchResult = book.getStringRepresentationOfBook();
 
 
         searchResultHandler.accept(searchResult);
     }
 
-    public String getStringRepresentationOfBook(Book book) {
+    public static String getStringRepresentationOfBook(Book book) {
         //TODO move to book
         ISBN isbnEntity = new ISBN(book.getIsbn());
 

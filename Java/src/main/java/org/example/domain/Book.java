@@ -1,5 +1,7 @@
 package org.example.domain;
 
+import org.example.presentation.BookSearchViewModel;
+
 public class Book {
 
     private final String isbn;
@@ -22,5 +24,9 @@ public class Book {
 
     public String getAuthor() {
         return author;
+    }
+
+    public String getStringRepresentationOfBook() {
+        return BookSearchViewModel.getStringRepresentationOfBook(this);
     }
 }
