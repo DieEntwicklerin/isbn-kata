@@ -11,7 +11,7 @@ import java.util.Optional;
 public class FakeInMemoryBookRepository implements BookRepository {
 
     private final List<Book> allBooks = List.of(
-            new Book("978-3-16-148410-0", "Example Book", "Jane Doe")
+            new Book(new ISBN("978-3-16-148410-0"), "Example Book", "Jane Doe")
     );
 
     @Override

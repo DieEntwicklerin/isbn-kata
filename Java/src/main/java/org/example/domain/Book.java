@@ -6,9 +6,8 @@ public class Book {
     private final String title;
     private final String author;
 
-    public Book(String isbnString, String title, String author) {
-        //TODO instanciate with isbn entity
-        this.isbn = new ISBN(isbnString);
+    public Book(ISBN isbn, String title, String author) {
+        this.isbn = isbn;
         this.title = title;
         this.author = author;
     }
