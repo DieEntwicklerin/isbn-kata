@@ -22,7 +22,7 @@ public class FakeInMemoryBookRepository implements BookRepository {
                 .findFirst();
     }
 
-    private boolean isEquivalentIsbn(String isbn1, String isbn2) {
+    protected boolean isEquivalentIsbn(String isbn1, String isbn2) {
         return StringUtils.removeSeparators(isbn1).equals(StringUtils.removeSeparators(isbn2));
     }
 
