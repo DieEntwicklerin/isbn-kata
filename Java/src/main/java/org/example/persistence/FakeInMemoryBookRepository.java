@@ -22,8 +22,8 @@ public class FakeInMemoryBookRepository implements BookRepository {
                 .findFirst();
     }
 
-    protected boolean isEquivalentIsbn(String isbn1, String isbn2) {
-        //TODO check if this is still needed
+    @Deprecated(since = "1.0", forRemoval = true)
+    private boolean isEquivalentIsbn(String isbn1, String isbn2) {
         return StringUtils.removeSeparators(isbn1).equals(StringUtils.removeSeparators(isbn2));
     }
 
