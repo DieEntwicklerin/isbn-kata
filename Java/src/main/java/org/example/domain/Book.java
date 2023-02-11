@@ -7,6 +7,7 @@ public class Book {
     private final String author;
 
     public Book(String isbnString, String title, String author) {
+        //TODO instanciate with isbn entity
         this.isbn = new ISBN(isbnString);
         this.title = title;
         this.author = author;
@@ -25,15 +26,9 @@ public class Book {
     }
 
     public String getStringRepresentationOfBook() {
-        //TODO change isbn usage
-        ISBN isbnEntity = new ISBN(getIsbnInStandardFormat());
+        var isbn1 = isbn.displayInCorrectFormatBasedOnLength();
+        var ean = isbn.convertToEan();
 
-        var isbn1 = isbnEntity.displayInCorrectFormatBasedOnLength();
-        var ean = isbnEntity.convertToEan();
-        var title1 = getTitle();
-        var author1 = getAuthor();
-
-        var searchResult = String.format("%s, %s, %s, %s", isbn1, ean, title1, author1);
-        return searchResult;
+        return String.format("%s, %s, %s, %s", isbn1, ean, getTitle(), getAuthor());
     }
 }
