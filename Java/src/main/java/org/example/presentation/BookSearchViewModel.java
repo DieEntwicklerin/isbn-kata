@@ -40,11 +40,7 @@ public class BookSearchViewModel {
     }
 
     private void onBookFound(Book book) {
-        //TODO domain knowledge of Book
-        String searchResult = book.getStringRepresentationOfBook();
-
-
-        searchResultHandler.accept(searchResult);
+        searchResultHandler.accept(book.getStringRepresentationOfBook());
     }
 
     private void onIllFormedIsbn(String illFormedIsbn) {
