@@ -81,7 +81,6 @@ public class BookSearchViewModel {
     }
 
     private void onBookNotFound(ISBN isbn) {
-        //TODO domain knowledge of ISBN or EAN
-        bookNotFoundErrorHandler.accept(StringUtils.displayInCorrectFormatBasedOnLength(isbn.toString()));
+        bookNotFoundErrorHandler.accept(isbn.displayInCorrectFormatBasedOnLength());
     }
 }

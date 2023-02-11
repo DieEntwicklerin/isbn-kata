@@ -1,5 +1,7 @@
 package org.example.domain;
 
+import org.example.utils.StringUtils;
+
 public class ISBN {
     private String isbn;
 
@@ -71,5 +73,9 @@ public class ISBN {
         } else {
             return false;
         }
+    }
+
+    public String displayInCorrectFormatBasedOnLength() {
+        return StringUtils.displayInCorrectFormatBasedOnLength(this.isbn);
     }
 }
