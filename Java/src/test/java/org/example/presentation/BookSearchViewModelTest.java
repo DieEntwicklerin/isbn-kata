@@ -33,6 +33,14 @@ class BookSearchViewModelTest {
         Assertions.assertNull(errorStream);
     }
 
+    @Test
+    void searchBookWithInValidISBN() {
+        String validISBN= "978-3-16-148410";
+        bookSearchViewModel.searchBook(validISBN);
+        Assertions.assertNull(result);
+        Assertions.assertNotNull(errorStream);
+    }
+
     private void showSearchResult(String result) {
         this.result= result;
     }
