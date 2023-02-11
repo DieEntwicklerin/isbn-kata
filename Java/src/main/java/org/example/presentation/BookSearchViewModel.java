@@ -28,12 +28,13 @@ public class BookSearchViewModel {
     }
 
     public void searchBook(String isbn) {
-        if (!StringUtils.isWellFormedIsbn(isbn)) {
+        ISBN isbnEntity= new ISBN(isbn);
+        if (!isbnEntity.isWellFormedIsbn()) {
             onIllFormedIsbn(isbn);
             return;
         }
 
-        final Optional<Book> exampleBook = bookRepository.byIsbn(new ISBN(isbn));
+        final Optional<Book> exampleBook = bookRepository.byIsbn(isbnEntity);
         exampleBook.ifPresentOrElse(
                 this::onBookFound,
                 () -> onBookNotFound(isbn)
@@ -41,6 +42,7 @@ public class BookSearchViewModel {
     }
 
     private void onBookFound(Book book) {
+        //TODO domain knowledge of ISBN
         var isbn = StringUtils.displayInCorrectFormatBasedOnLength(book.getIsbn());
         var ean = convertToEan(book.getIsbn());
         var title = book.getTitle();
@@ -51,6 +53,7 @@ public class BookSearchViewModel {
     }
 
     private String convertToEan(String isbn) {
+        //TODO domain knowledge of ISBN or EAN
         var isbnWithoutSeparators = StringUtils.removeSeparators(isbn);
         String prefix;
         if (isbnWithoutSeparators.length() == 10) {
