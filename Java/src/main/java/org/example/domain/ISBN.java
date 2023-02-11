@@ -82,7 +82,7 @@ public class ISBN {
         } else if (isbnWithoutSeparators.length() == 13) {
             return StringUtils.replaceAllSpaces(this.isbn, "-");
         }
-        return null;
+        return isbn.toString();
     }
 
     public String convertToEan() {
