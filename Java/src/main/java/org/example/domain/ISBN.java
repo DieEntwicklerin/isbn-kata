@@ -7,9 +7,11 @@ import java.util.Objects;
 
 public class ISBN {
     private final String isbn;
+    private final String isbnWithoutSeparators;
 
     public ISBN(@NonNull String isbn) {
         this.isbn = isbn;
+        isbnWithoutSeparators = getIsbnWithoutSeparators(isbn);
     }
 
     @Override
@@ -79,7 +81,6 @@ public class ISBN {
     }
 
     public String displayInCorrectFormatBasedOnLength() {
-        String isbnWithoutSeparators = getIsbnWithoutSeparators();
         if (is10DigitISBN(isbnWithoutSeparators)) {
             return StringUtils.replaceAllHyphens(this.isbn, " ");
         } else if (is13DigitISBN(isbnWithoutSeparators)) {
@@ -98,7 +99,6 @@ public class ISBN {
 
 
     public String convertToEan() {
-        var isbnWithoutSeparators = getIsbnWithoutSeparators();
         String prefix;
         if (is10DigitISBN(isbnWithoutSeparators)) {
             prefix = "978";
@@ -114,10 +114,6 @@ public class ISBN {
                 .toString();
     }
 
-    private String getIsbnWithoutSeparators() {
-        return getIsbnWithoutSeparators(this.isbn);
-    }
-
     private String getIsbnWithoutSeparators(String isbn) {
         return StringUtils.removeSeparators(isbn);
     }
@@ -129,7 +125,7 @@ public class ISBN {
 
         ISBN isbn1 = (ISBN) o;
 
-        return Objects.equals(getIsbnWithoutSeparators(), getIsbnWithoutSeparators(isbn1.isbn));
+        return Objects.equals(isbnWithoutSeparators, getIsbnWithoutSeparators(isbn1.isbn));
     }
 
     @Override
