@@ -2,7 +2,9 @@ package org.example.presentation;
 
 import org.example.domain.Book;
 import org.example.domain.BookRepository;
+import org.example.domain.ISBN;
 import org.example.utils.StringUtils;
+import org.example.domain.ISBN;
 
 import java.util.Optional;
 import java.util.function.Consumer;
@@ -31,7 +33,7 @@ public class BookSearchViewModel {
             return;
         }
 
-        final Optional<Book> exampleBook = bookRepository.byIsbn(isbn);
+        final Optional<Book> exampleBook = bookRepository.byIsbn(new ISBN(isbn));
         exampleBook.ifPresentOrElse(
                 this::onBookFound,
                 () -> onBookNotFound(isbn)

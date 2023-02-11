@@ -3,6 +3,7 @@ package org.example.persistence;
 import org.example.domain.Book;
 import org.example.domain.BookRepository;
 import org.example.utils.StringUtils;
+import org.example.domain.ISBN;
 
 import java.util.List;
 import java.util.Optional;
@@ -23,5 +24,10 @@ public class FakeInMemoryBookRepository implements BookRepository {
 
     private boolean isEquivalentIsbn(String isbn1, String isbn2) {
         return StringUtils.removeSeparators(isbn1).equals(StringUtils.removeSeparators(isbn2));
+    }
+
+    @Override
+    public Optional<Book> byIsbn(ISBN validISBN) {
+        return this.byIsbn(validISBN.toString());
     }
 }
