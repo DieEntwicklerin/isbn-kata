@@ -42,14 +42,21 @@ public class BookSearchViewModel {
     }
 
     private void onBookFound(Book book) {
-        //TODO domain knowledge of ISBN
+        //TODO domain knowledge of Book
+        String searchResult = getStringRepresentationOfBook(book);
+
+
+        searchResultHandler.accept(searchResult);
+    }
+
+    private String getStringRepresentationOfBook(Book book) {
         var isbn = StringUtils.displayInCorrectFormatBasedOnLength(book.getIsbn());
         var ean = convertToEan(book.getIsbn());
         var title = book.getTitle();
         var author = book.getAuthor();
 
         var searchResult = String.format("%s, %s, %s, %s", isbn, ean, title, author);
-        searchResultHandler.accept(searchResult);
+        return searchResult;
     }
 
     private String convertToEan(String isbn) {
