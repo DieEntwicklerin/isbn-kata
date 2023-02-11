@@ -2,6 +2,7 @@ package org.example.persistence;
 
 import org.example.domain.Book;
 import org.example.domain.BookRepository;
+import org.example.domain.ISBN;
 
 import java.util.Map;
 import java.util.Optional;
@@ -19,5 +20,10 @@ public class FakeInMemoryBookRepository implements BookRepository {
         }
 
         return Optional.of(bookByIsbn.get(isbn));
+    }
+
+    @Override
+    public Optional<Book> byIsbn(ISBN validISBN) {
+        return this.byIsbn(validISBN.toString());
     }
 }
