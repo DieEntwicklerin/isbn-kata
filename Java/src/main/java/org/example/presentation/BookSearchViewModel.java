@@ -47,19 +47,6 @@ public class BookSearchViewModel {
         searchResultHandler.accept(searchResult);
     }
 
-    public static String getStringRepresentationOfBook(Book book) {
-        //TODO move to book
-        ISBN isbnEntity = new ISBN(book.getIsbn());
-
-        var isbn = isbnEntity.displayInCorrectFormatBasedOnLength();
-        var ean = isbnEntity.convertToEan();
-        var title = book.getTitle();
-        var author = book.getAuthor();
-
-        var searchResult = String.format("%s, %s, %s, %s", isbn, ean, title, author);
-        return searchResult;
-    }
-
     private void onIllFormedIsbn(String illFormedIsbn) {
         illFormedIsbnErrorHandler.accept(illFormedIsbn);
     }

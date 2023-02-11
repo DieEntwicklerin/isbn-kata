@@ -1,7 +1,5 @@
 package org.example.domain;
 
-import org.example.presentation.BookSearchViewModel;
-
 public class Book {
 
     private final String isbn;
@@ -27,6 +25,15 @@ public class Book {
     }
 
     public String getStringRepresentationOfBook() {
-        return BookSearchViewModel.getStringRepresentationOfBook(this);
+        //TODO change isbn usage
+        ISBN isbnEntity = new ISBN(getIsbn());
+
+        var isbn1 = isbnEntity.displayInCorrectFormatBasedOnLength();
+        var ean = isbnEntity.convertToEan();
+        var title1 = getTitle();
+        var author1 = getAuthor();
+
+        var searchResult = String.format("%s, %s, %s, %s", isbn1, ean, title1, author1);
+        return searchResult;
     }
 }
