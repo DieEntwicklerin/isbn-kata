@@ -49,7 +49,8 @@ public class BookSearchViewModel {
         searchResultHandler.accept(searchResult);
     }
 
-    private String getStringRepresentationOfBook(Book book) {
+    public String getStringRepresentationOfBook(Book book) {
+        //TODO move to book
         var isbn = StringUtils.displayInCorrectFormatBasedOnLength(book.getIsbn());
         var ean = convertToEan(book.getIsbn());
         var title = book.getTitle();
@@ -59,7 +60,7 @@ public class BookSearchViewModel {
         return searchResult;
     }
 
-    private String convertToEan(String isbn) {
+    public String convertToEan(String isbn) {
         //TODO domain knowledge of ISBN or EAN
         var isbnWithoutSeparators = StringUtils.removeSeparators(isbn);
         String prefix;
@@ -81,6 +82,7 @@ public class BookSearchViewModel {
     }
 
     private void onBookNotFound(String isbn) {
+        //TODO domain knowledge of ISBN or EAN
         bookNotFoundErrorHandler.accept(StringUtils.displayInCorrectFormatBasedOnLength(isbn));
     }
 }

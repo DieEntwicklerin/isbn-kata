@@ -7,15 +7,16 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import javax.swing.plaf.basic.BasicInternalFrameTitlePane;
 import java.util.function.Consumer;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 public class BookSearchViewModelTest {
-    String result=null;
-    String errorStream=null;
+    String result = null;
+    String errorStream = null;
 
-    String invalidISBNStream=null;
+    String invalidISBNStream = null;
 
     private BookSearchViewModel bookSearchViewModel;
 
@@ -26,32 +27,41 @@ public class BookSearchViewModelTest {
     }
 
     @Test
-    public  void searchBookWithValidISBN() {
-        String validISBN= "978-3-16-148410-0";
+    public void searchBookWithValidISBN() {
+        String validISBN = "978-3-16-148410-0";
         bookSearchViewModel.searchBook(validISBN);
-        Assertions.assertNotNull(result);
+        Assertions.assertEquals("978-3-16-148410-0, 9783161484100, Example Book, Jane Doe", result);
         Assertions.assertNull(errorStream);
         Assertions.assertNull(invalidISBNStream);
     }
 
     @Test
-    public  void searchBookWithInValidISBN() {
-        String inValidISBN= "978-3-16-148410";
+    public void searchBookWithValidButUnknownISBN() {
+        String validISBN = "978-3-16-148435-0";
+        bookSearchViewModel.searchBook(validISBN);
+        Assertions.assertNull(result);
+        Assertions.assertEquals(validISBN, errorStream);
+        Assertions.assertNull(invalidISBNStream);
+    }
+
+    @Test
+    public void searchBookWithInValidISBN() {
+        String inValidISBN = "978-3-16-148410";
         bookSearchViewModel.searchBook(inValidISBN);
         Assertions.assertNull(result);
-        Assertions.assertNotNull(invalidISBNStream);
         Assertions.assertNull(errorStream);
+        Assertions.assertEquals(inValidISBN, invalidISBNStream);
     }
 
     private void showSearchResult(String result) {
-        this.result= result;
+        this.result = result;
     }
 
     private void showBookNotFoundErrorMessage(String isbn) {
-        this.errorStream= String.format("No book found for the provided ISBN %s.", isbn);
+        this.errorStream = isbn;
     }
 
     private void showInvalidIsbnErrorMessage(String illFormedIsbn) {
-        invalidISBNStream= String.format("The provided search phrase `%s` is not a well-formed ISBN.", illFormedIsbn);
+        invalidISBNStream = illFormedIsbn;
     }
 }
