@@ -3,7 +3,6 @@ package org.example.presentation;
 import org.example.domain.Book;
 import org.example.domain.BookRepository;
 import org.example.domain.ISBN;
-import org.example.utils.StringUtils;
 
 import java.util.Optional;
 import java.util.function.Consumer;
@@ -59,23 +58,6 @@ public class BookSearchViewModel {
 
         var searchResult = String.format("%s, %s, %s, %s", isbn, ean, title, author);
         return searchResult;
-    }
-
-    public static String convertToEan(String isbn) {
-        //TODO domain knowledge of ISBN or EAN
-        var isbnWithoutSeparators = StringUtils.removeSeparators(isbn);
-        String prefix;
-        if (isbnWithoutSeparators.length() == 10) {
-            prefix = "978";
-        } else if (isbnWithoutSeparators.length() == 13) {
-            prefix = "";
-        } else {
-            throw new RuntimeException("Should never happen. If it does, then // TODO debug it.");
-        }
-        return new StringBuilder()
-                .append(prefix)
-                .append(isbnWithoutSeparators)
-                .toString();
     }
 
     private void onIllFormedIsbn(String illFormedIsbn) {

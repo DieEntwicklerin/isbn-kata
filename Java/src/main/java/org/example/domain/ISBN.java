@@ -1,6 +1,5 @@
 package org.example.domain;
 
-import org.example.presentation.BookSearchViewModel;
 import org.example.utils.StringUtils;
 
 public class ISBN {
@@ -87,6 +86,19 @@ public class ISBN {
     }
 
     public String convertToEan() {
-       return BookSearchViewModel.convertToEan(this.isbn);
+        var isbnWithoutSeparators = StringUtils.removeSeparators(this.isbn);
+        String prefix;
+        if (isbnWithoutSeparators.length() == 10) {
+            prefix = "978";
+        } else if (isbnWithoutSeparators.length() == 13) {
+            prefix = "";
+        } else {
+            //TODO replace by a business exception. If this exception is thrown the isbn is malformed
+            throw new RuntimeException("Should never happen. If it does, then // TODO debug it.");
+        }
+        return new StringBuilder()
+                .append(prefix)
+                .append(isbnWithoutSeparators)
+                .toString();
     }
 }
