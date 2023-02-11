@@ -35,8 +35,8 @@ class BookSearchViewModelTest {
 
     @Test
     void searchBookWithInValidISBN() {
-        String validISBN= "978-3-16-148410";
-        bookSearchViewModel.searchBook(validISBN);
+        String inValidISBN= "978-3-16-148410";
+        bookSearchViewModel.searchBook(inValidISBN);
         Assertions.assertNull(result);
         Assertions.assertNotNull(errorStream);
     }
