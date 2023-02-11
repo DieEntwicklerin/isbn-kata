@@ -29,11 +29,9 @@ public class FakeInMemoryBookRepository implements BookRepository {
 
     @Override
     public Optional<Book> byIsbn(ISBN isbn) {
-        if (isbn == null)
-            return null;
         return allBooks
                 .stream()
-                .filter(book -> isEquivalentIsbn(book.getIsbn().displayInCorrectFormatBasedOnLength(), isbn.displayInCorrectFormatBasedOnLength()))
+                .filter(book -> book.getIsbn().equals(isbn))
                 .findFirst();
     }
 }

@@ -17,11 +17,9 @@ public class BookRepositoryMock extends FakeInMemoryBookRepository {
     @Override
     public Optional<Book> byIsbn(ISBN isbn) {
         //TODO refactor: is a 100 percent copy of the super.byisbn. Needed because of the allbooks.
-        if (isbn == null)
-            return null;
         return allBooks
                 .stream()
-                .filter(book -> isEquivalentIsbn(book.getIsbn().displayInCorrectFormatBasedOnLength(), isbn.displayInCorrectFormatBasedOnLength()))
+                .filter(book -> book.getIsbn().equals(isbn))
                 .findFirst();
     }
 }

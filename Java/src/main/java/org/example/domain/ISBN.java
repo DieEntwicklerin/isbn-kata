@@ -1,11 +1,14 @@
 package org.example.domain;
 
+import lombok.NonNull;
 import org.example.utils.StringUtils;
+
+import java.util.Objects;
 
 public class ISBN {
     private String isbn;
 
-    public ISBN(String isbn) {
+    public ISBN(@NonNull String isbn) {
         this.isbn = isbn;
     }
 
@@ -76,7 +79,8 @@ public class ISBN {
     }
 
     public String displayInCorrectFormatBasedOnLength() {
-        String isbnWithoutSeparators = StringUtils.removeSeparators(this.isbn);
+        String isbnWithoutSeparators = getIsbnWithoutSeparators();
+        //TODO refactor to a new method is10DigitIsbn ..
         if (isbnWithoutSeparators.length() == 10) {
             return StringUtils.replaceAllHyphens(this.isbn, " ");
         } else if (isbnWithoutSeparators.length() == 13) {
@@ -85,8 +89,9 @@ public class ISBN {
         return isbn.toString();
     }
 
+
     public String convertToEan() {
-        var isbnWithoutSeparators = StringUtils.removeSeparators(this.isbn);
+        var isbnWithoutSeparators = getIsbnWithoutSeparators();
         String prefix;
         if (isbnWithoutSeparators.length() == 10) {
             prefix = "978";
@@ -100,5 +105,28 @@ public class ISBN {
                 .append(prefix)
                 .append(isbnWithoutSeparators)
                 .toString();
+    }
+
+    private String getIsbnWithoutSeparators() {
+        return getIsbnWithoutSeparators(this.isbn);
+    }
+
+    private String getIsbnWithoutSeparators(String isbn) {
+        return StringUtils.removeSeparators(isbn);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        ISBN isbn1 = (ISBN) o;
+
+        return Objects.equals(getIsbnWithoutSeparators(), getIsbnWithoutSeparators(isbn1.isbn));
+    }
+
+    @Override
+    public int hashCode() {
+        return isbn != null ? isbn.hashCode() : 0;
     }
 }
