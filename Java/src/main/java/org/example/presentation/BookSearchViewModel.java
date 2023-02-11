@@ -4,7 +4,6 @@ import org.example.domain.Book;
 import org.example.domain.BookRepository;
 import org.example.domain.ISBN;
 import org.example.utils.StringUtils;
-import org.example.domain.ISBN;
 
 import java.util.Optional;
 import java.util.function.Consumer;
@@ -37,7 +36,7 @@ public class BookSearchViewModel {
         final Optional<Book> exampleBook = bookRepository.byIsbn(isbnEntity);
         exampleBook.ifPresentOrElse(
                 this::onBookFound,
-                () -> onBookNotFound(isbn)
+                () -> onBookNotFound(isbnEntity)
         );
     }
 
@@ -81,8 +80,8 @@ public class BookSearchViewModel {
         illFormedIsbnErrorHandler.accept(illFormedIsbn);
     }
 
-    private void onBookNotFound(String isbn) {
+    private void onBookNotFound(ISBN isbn) {
         //TODO domain knowledge of ISBN or EAN
-        bookNotFoundErrorHandler.accept(StringUtils.displayInCorrectFormatBasedOnLength(isbn));
+        bookNotFoundErrorHandler.accept(StringUtils.displayInCorrectFormatBasedOnLength(isbn.toString()));
     }
 }
