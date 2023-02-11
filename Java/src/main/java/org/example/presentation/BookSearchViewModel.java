@@ -50,7 +50,9 @@ public class BookSearchViewModel {
 
     public String getStringRepresentationOfBook(Book book) {
         //TODO move to book
-        var isbn = StringUtils.displayInCorrectFormatBasedOnLength(book.getIsbn());
+        ISBN isbnEntity = new ISBN(book.getIsbn());
+
+        var isbn = isbnEntity.displayInCorrectFormatBasedOnLength();
         var ean = convertToEan(book.getIsbn());
         var title = book.getTitle();
         var author = book.getAuthor();
